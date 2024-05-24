@@ -8,7 +8,6 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var goalsRouter = require('./routes/goals');
 var tasksRouter = require('./routes/tasks');
-
 const router = express.Router();
 
 var app = express();
