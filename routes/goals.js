@@ -10,15 +10,24 @@ router.get('/getGoals', function(req, res, next) {
 
 router.post('/addGoals', function(req, res, next) {
     let timestamp = Date.now()+(Math.random());
-    req.body.id = timestamp.toString();
-    goals.push(req.body);
-    res.json(goals);
+    if(req.body && req.body.nombre && req.body.descripcion && req.body.fecha){
+        req.body.id = timestamp.toString();
+        goals.push(req.body);
+        res.status(200).json(goals);
+    } else {
+        res.status(400).json({"error":"No se estan enviando los parámetros completos"});
+    }
+        
 });
 
 router.delete('/removeGoals/:id', function(req, res, next){
-    let id = req.params.id;
-    goals = goals.filter(goal => goal.id !== id)
-    res.json(goals);
+    if(req.params && req.params.id){
+        let id = req.params.id;
+        goals = goals.filter(goal => goal.id !== id)
+        res.status(200).json(goals);
+    } else {
+        res.status(400).json({"error":"No se esta enviando el parámetro correcto"});
+    }
 })
 
 
